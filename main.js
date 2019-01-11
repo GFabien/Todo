@@ -60,10 +60,16 @@ Vue.component("add-todo", {
 });
 
 Vue.component("todo-list", {
+    props: {
+        done: {
+          type: Boolean,
+          required: true
+        },
+    },
   template: `
   <div>
-    <h1>My todolist</h1>
-    <p v-if="!todoList.length">No todo yet</p>
+    <h1>{{ title }}</h1>
+    <p v-if="!todoList.length">{{ legend }}</p>
     <ul>
       <li v-for="(todo, index) in todoList">
         <todo :name="todo.name" 
@@ -72,7 +78,7 @@ Vue.component("todo-list", {
         @todo-deleted=deleteTodo></todo>
       </li>
     </ul>
-    <add-todo @add-todo-submitted="addTodo"></add-todo>
+    <add-todo v-if="!done" @add-todo-submitted="addTodo"></add-todo>
   </div>
       `,
   data() {
@@ -88,7 +94,22 @@ Vue.component("todo-list", {
       this.todoList.splice(index, 1);
     }
   },
-  computed: {}
+  computed: {
+      title() {
+          if (this.done) {
+              return "My done list";
+          } else {
+              return "My todo list";
+          }
+      },
+      legend() {
+          if (this.done) {
+              return "No done yet";
+          } else {
+              return "No todo yet";
+          }
+      }
+  }
 });
 
 const app = new Vue({
