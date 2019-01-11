@@ -1,17 +1,21 @@
 <!DOCTYPE html>
 
 <html>
-    <head>
-        <title>My todolist</title>
-    </head>
+  <head>
+    <title>My todolist</title>
+  </head>
 
-    <body>
-        <div id='app'>
-            <todo name="Make a todo app"></todo>
-            <add-todo @add-todo-submitted="addTodo"></add-todo>
-        </div>
-    </body>
+  <body>
+    <div id="app">
+      <ul>
+        <li v-for="todo in todoList">
+            <todo :name="todo.name"></todo>
+        </li>
+      </ul>
+      <add-todo @add-todo-submitted="addTodo"></add-todo>
+    </div>
+  </body>
 
-    <script src="https://cdn.jsdelivr.net/npm/vue@2.5.13/dist/vue.js"></script>
-    <script src="main.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/vue@2.5.13/dist/vue.js"></script>
+  <script src="main.js"></script>
 </html>

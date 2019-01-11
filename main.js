@@ -44,7 +44,11 @@ Vue.component('add-todo', {
     },
     methods: {
         onSubmit() {
-            this.$emit('add-todo-submitted', newTodo);
+            let todo = {
+                name: this.newTodo,
+                done: false
+            }
+            this.$emit('add-todo-submitted', todo);
             this.name = null;
         }
     },
@@ -60,6 +64,7 @@ const app = new Vue({
     },
     methods: {
         addTodo(todo) {
+            console.log(todo);
             this.todoList.push(todo);
         }
     }
