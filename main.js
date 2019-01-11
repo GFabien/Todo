@@ -4,21 +4,27 @@ Vue.component('todo', {
             type: String,
             required: true
         },
-        done: {
-            type: Boolean,
-            default: false
+        index: {
+            type: Number,
+            required: true
         }
     },
     template: `
-    <p>{{ name }}</p>
+    <div>
+        <p>{{ name }}</p>
+        <input type="checkbox" v-model="done">
+        <button v-on:click="deleteTodo">Delete todo</button>
+    </div>
     `,
     data() {
         return {
-
+            done: false
         }
     },
     methods: {
-
+        deleteTodo() {
+            this.$emit('todo-deleted', this.index);
+        }
     },
     computed: {
 
@@ -64,8 +70,10 @@ const app = new Vue({
     },
     methods: {
         addTodo(todo) {
-            console.log(todo);
             this.todoList.push(todo);
+        },
+        deleteTodo(index) {
+            this.todoList.splice(index, 1);
         }
     }
 })
