@@ -50,7 +50,7 @@ Vue.component("add-todo", {
             <input id="newTodo" v-model="newTodo" required>
         </p>
         <p>
-          <input type="submit" value="Add todo">  
+          <input type="submit" value="Add to-do">  
         </p>
     </form>
     `,
@@ -129,14 +129,14 @@ Vue.component("todo-list", {
       if (this.done) {
         return "My done list";
       } else {
-        return "My todo list";
+        return "My to-do list";
       }
     },
     legend() {
       if (this.done) {
         return "No done yet";
       } else {
-        return "No todo yet";
+        return "No to-do yet";
       }
     }
   }
