@@ -7,10 +7,10 @@
 
   <body>
     <div id="app">
+        <h1>My todolist</h1>
+        <p v-if="!todoList.length">No todo yet</p>
       <ul>
-        <li v-for="todo in todoList">
-            <todo :name="todo.name"></todo>
-        </li>
+        <li v-for="todo in todoList"><todo :name="todo.name"></todo></li>
       </ul>
       <add-todo @add-todo-submitted="addTodo"></add-todo>
     </div>
