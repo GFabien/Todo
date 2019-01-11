@@ -27,7 +27,7 @@ Vue.component('todo', {
 
 Vue.component('add-todo', {
     template: `
-    <form>
+    <form @submit.prevent="onSubmit">
         <p>
             <label for="newTodo">New todo:</label>
             <input id="newTodo" v-model="newTodo" required>
@@ -43,7 +43,10 @@ Vue.component('add-todo', {
         }
     },
     methods: {
-
+        onSubmit() {
+            this.$emit('add-todo-submitted', newTodo);
+            this.name = null;
+        }
     },
     computed: {
 
@@ -53,7 +56,11 @@ Vue.component('add-todo', {
 const app = new Vue({
     el: '#app',
     data: {
+        todoList: []
     },
     methods: {
+        addTodo(todo) {
+            this.todoList.push(todo);
+        }
     }
 })
