@@ -3,13 +3,14 @@
 <html>
   <head>
     <title>My todolist</title>
-    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="style.css" />
   </head>
 
   <body>
     <div id="app">
-      <todo-list :done=false></todo-list>
-      <todo-list :done=true></todo-list>
+      <add-todo @add-todo-submitted="addTodo"></add-todo>
+      <todo-list :done="false" :todos="todoList" @todo-deleted="addDone"></todo-list>
+      <todo-list :done="true" :todos="doneList" @done-deleted="addTodo"></todo-list>
     </div>
   </body>
 
