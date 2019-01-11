@@ -1,0 +1,19 @@
+ul {
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+  }
+
+.todo {
+    display: flex;
+}
+
+img {
+    width: 30px;
+    height: 30px;
+}
+
+button {
+    background-color: transparent;
+    border: none;
+}
