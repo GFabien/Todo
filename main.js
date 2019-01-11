@@ -59,10 +59,26 @@ Vue.component("add-todo", {
   computed: {}
 });
 
-const app = new Vue({
-  el: "#app",
-  data: {
-    todoList: []
+Vue.component("todo-list", {
+  template: `
+  <div>
+    <h1>My todolist</h1>
+    <p v-if="!todoList.length">No todo yet</p>
+    <ul>
+      <li v-for="(todo, index) in todoList">
+        <todo :name="todo.name" 
+        :key="index"
+        :index="index"
+        @todo-deleted=deleteTodo></todo>
+      </li>
+    </ul>
+    <add-todo @add-todo-submitted="addTodo"></add-todo>
+  </div>
+      `,
+  data() {
+    return {
+      todoList: []
+    };
   },
   methods: {
     addTodo(todo) {
@@ -71,5 +87,14 @@ const app = new Vue({
     deleteTodo(index) {
       this.todoList.splice(index, 1);
     }
+  },
+  computed: {}
+});
+
+const app = new Vue({
+  el: "#app",
+  data: {
+  },
+  methods: {
   }
 });

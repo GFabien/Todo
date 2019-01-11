@@ -8,17 +8,7 @@
 
   <body>
     <div id="app">
-      <h1>My todolist</h1>
-      <p v-if="!todoList.length">No todo yet</p>
-      <ul>
-        <li v-for="(todo, index) in todoList">
-          <todo :name="todo.name" 
-          :key="index"
-          :index="index"
-          @todo-deleted=deleteTodo></todo>
-        </li>
-      </ul>
-      <add-todo @add-todo-submitted="addTodo"></add-todo>
+      <todo-list></todo-list>
     </div>
   </body>
 
