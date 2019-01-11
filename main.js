@@ -94,10 +94,13 @@ Vue.component("todo-list", {
         @done-deleted=deleteDone></todo>
       </li>
     </ul>
+    <button v-if="todos.length" v-on:click="deleteAllTodos"><img :src="imageGarbage" alt="garbage"/></button>
   </div>
       `,
   data() {
-    return {};
+    return {
+        imageGarbage: "./garbage.png"
+    };
   },
   methods: {
     deleteTodo(index) {
@@ -107,6 +110,9 @@ Vue.component("todo-list", {
     deleteDone(index) {
       this.$emit("done-deleted", this.todos[index]);
       this.todos.splice(index, 1);
+    },
+    deleteAllTodos() {
+        this.$emit("all-deleted", this.done);
     }
   },
   computed: {
@@ -139,6 +145,13 @@ const app = new Vue({
     },
     addDone(todo) {
         this.doneList.push(todo);
+    },
+    deleteAll(done) {
+        if (done) {
+            this.doneList = [];
+        } else {
+            this.todoList = [];
+        }
     }
   }
 });

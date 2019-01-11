@@ -9,8 +9,8 @@
   <body>
     <div id="app">
       <add-todo @add-todo-submitted="addTodo"></add-todo>
-      <todo-list :done="false" :todos="todoList" @todo-deleted="addDone"></todo-list>
-      <todo-list :done="true" :todos="doneList" @done-deleted="addTodo"></todo-list>
+      <todo-list :done="false" :todos="todoList" @todo-deleted="addDone" @all-deleted="deleteAll"></todo-list>
+      <todo-list :done="true" :todos="doneList" @done-deleted="addTodo" @all-deleted="deleteAll"></todo-list>
     </div>
   </body>
 
