@@ -15,15 +15,17 @@ Vue.component("todo", {
   },
   template: `
     <div class="todo">
-        <button v-if="done" v-on:click="deleteDone"><img :src="imageCross" alt="cross"/></button>
-        <button v-if="!done" v-on:click="deleteTodo"><img :src="imageTick" alt="tick"/></button>
+        <button v-on:click="deleteOne"><img :src="imageGarbage" alt="tick"/></button>
+        <button v-if="done" v-on:click="deleteDone"><img :src="imageCross" alt="cross" class="move"/></button>
+        <button v-if="!done" v-on:click="deleteTodo"><img :src="imageTick" alt="tick" class="move"/></button>
         <p>{{ name }}</p>
     </div>
     `,
   data() {
     return {
       imageCross: "./cross.png",
-      imageTick: "./tick.png"
+      imageTick: "./tick.png",
+      imageGarbage: "./garbage.png"
     };
   },
   methods: {
@@ -32,6 +34,9 @@ Vue.component("todo", {
     },
     deleteDone() {
       this.$emit("done-deleted", this.index);
+    },
+    deleteOne() {
+        this.$emit("deletion", this.index);
     }
   },
   computed: {}
@@ -90,11 +95,12 @@ Vue.component("todo-list", {
         :key="index"
         :index="index"
         :done="done"
+        @deletion=deleteOne
         @todo-deleted=deleteTodo
         @done-deleted=deleteDone></todo>
       </li>
     </ul>
-    <button v-if="todos.length" v-on:click="deleteAllTodos"><img :src="imageGarbage" alt="garbage"/></button>
+    <button v-if="todos.length" v-on:click="deleteAllTodos"><img :src="imageGarbage" alt="garbage" class="big"/></button>
   </div>
       `,
   data() {
@@ -113,6 +119,9 @@ Vue.component("todo-list", {
     },
     deleteAllTodos() {
         this.$emit("all-deleted", this.done);
+    },
+    deleteOne(index) {
+        this.todos.splice(index, 1);
     }
   },
   computed: {
