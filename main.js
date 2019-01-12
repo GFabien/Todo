@@ -15,9 +15,15 @@ Vue.component("todo", {
   },
   template: `
     <div class="todo">
-        <button v-on:click="deleteOne"><img :src="imageGarbage" alt="tick"/></button>
-        <button v-if="done" v-on:click="deleteDone"><img :src="imageCross" alt="cross" class="move"/></button>
-        <button v-if="!done" v-on:click="deleteTodo"><img :src="imageTick" alt="tick" class="move"/></button>
+        <button v-on:click="deleteOne" v-on:mouseenter="increaseOpacity" v-on:mouseout="decreaseOpacity">
+            <img :src="imageGarbage" v-on:mouseenter="increaseOpacity" v-on:mouseout="decreaseOpacity" alt="tick" />
+        </button>
+        <button v-if="done" v-on:click="deleteDone" v-on:mouseenter="increaseOpacity" v-on:mouseout="decreaseOpacity">
+            <img :src="imageCross" v-on:mouseenter="increaseOpacity" v-on:mouseout="decreaseOpacity" alt="cross" class="move"/>
+        </button>
+        <button v-if="!done" v-on:click="deleteTodo" v-on:mouseenter="increaseOpacity" v-on:mouseout="decreaseOpacity">
+            <img :src="imageTick" v-on:mouseenter="increaseOpacity" v-on:mouseout="decreaseOpacity" alt="tick" class="move"/>
+        </button>
         <p>{{ name }}</p>
     </div>
     `,
@@ -37,6 +43,14 @@ Vue.component("todo", {
     },
     deleteOne() {
         this.$emit("deletion", this.index);
+    },
+    increaseOpacity(e) {
+        if (e.target.childNodes.length) e.target.childNodes[0].style.opacity = 1;
+        else e.target.style.opacity = 1;
+    },
+    decreaseOpacity(e) {
+        if (e.target.childNodes.length) e.target.childNodes[0].style.opacity = 0.3;
+        else e.target.style.opacity = 0.3;
     }
   },
   computed: {}
@@ -100,7 +114,9 @@ Vue.component("todo-list", {
         @done-deleted=deleteDone></todo>
       </li>
     </ul>
-    <button v-if="todos.length" v-on:click="deleteAllTodos"><img :src="imageGarbage" alt="garbage" class="big"/></button>
+    <button v-if="todos.length" v-on:click="deleteAllTodos" v-on:mouseenter="increaseOpacity" v-on:mouseout="decreaseOpacity">
+        <img :src="imageGarbage" v-on:mouseenter="increaseOpacity" v-on:mouseout="decreaseOpacity" alt="garbage" class="big"/>
+    </button>
   </div>
       `,
   data() {
@@ -122,6 +138,14 @@ Vue.component("todo-list", {
     },
     deleteOne(index) {
         this.todos.splice(index, 1);
+    },
+    increaseOpacity(e) {
+        if (e.target.childNodes.length) e.target.childNodes[0].style.opacity = 1;
+        else e.target.style.opacity = 1;
+    },
+    decreaseOpacity(e) {
+        if (e.target.childNodes.length) e.target.childNodes[0].style.opacity = 0.6;
+        else e.target.style.opacity = 0.6;
     }
   },
   computed: {
